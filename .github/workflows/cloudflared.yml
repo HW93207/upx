@@ -21,24 +21,26 @@ jobs:
           tar -Jxf upx*.tar.xz
           sudo cp upx*/upx /usr/bin
           
-          # download cloudflared and unzip
-          mkdir -p musldist/linux-amd64
-          cd musldist/linux-amd64
-          wget -qO cloudflared https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
+          # download cloudflared
+          mkdir -p musldist
+          cd musldist
+          wget -qO cloudflared-linux-amd64 https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
+          wget -qO cloudflared-linux-arm64 https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64
 
           # do upx Compress
-          upx --best cloudflared
+          upx --best cloudflared-linux-amd64
+          upx --best cloudflared-linux-arm64
 
       - name: Upload dist
         uses: actions/upload-artifact@main
         with:
           name: cloudflared
           path: |
-              musldist/linux-amd64
+              musldist
 
       - name: Generate release tag
         id: tag
-        run: echo "::set-output name=release_tag::nezha-agent"
+        run: echo "::set-output name=release_tag::cloudflared"
 
       - name: Create release
         uses: softprops/action-gh-release@v1
@@ -47,7 +49,7 @@ jobs:
         with:
           tag_name: ${{ steps.tag.outputs.release_tag }}
           files: |
-              musldist/linux-amd64/*
+              musldist/*
 
       - name: Remove old Releases
         uses: dev-drprasad/delete-older-releases@v0.1.0
