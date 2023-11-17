@@ -21,9 +21,11 @@ jobs:
           tar -Jxf upx*.tar.xz
           sudo cp upx*/upx /usr/bin
           
-          # linux_amd64: download nezha-agent and unzip
+          # set work dir
           mkdir -p musldist
           cd musldist
+          
+          # linux_amd64
           wget -O nezha-agent_linux_amd64.zip https://github.com/nezhahq/agent/releases/latest/download/nezha-agent_linux_amd64.zip
           unzip -qod ./ nezha-agent_linux_amd64.zip
           rm -f nezha-agent_linux_amd64.zip
@@ -31,7 +33,7 @@ jobs:
           zip nezha-agent_linux_amd64.zip nezha-agent
           rm nezha-agent
 
-          # linux_arm64: download nezha-agent and unzip
+          # linux_arm64
           wget -O nezha-agent_linux_arm64.zip https://github.com/nezhahq/agent/releases/latest/download/nezha-agent_linux_arm64.zip
           unzip -qod ./ nezha-agent_linux_arm64.zip
           rm -f nezha-agent_linux_amd64.zip
