@@ -26,7 +26,9 @@ jobs:
           cd musldist
           wget -qO cloudflared-linux-amd64 https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
           wget -qO cloudflared-linux-arm64 https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64
-
+          chmod +x cloudflared-linux-amd64
+          chmod +x cloudflared-linux-arm64
+          
           # do upx Compress
           upx --best cloudflared-linux-amd64
           upx --best cloudflared-linux-arm64
