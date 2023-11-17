@@ -1,0 +1,59 @@
+name: Build cloudflared Compress with UPX
+
+on:
+  workflow_dispatch:
+  #push:
+  #  branches:
+  #    - main
+  #schedule:
+  #  - cron: 0 16 * * *
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Compress with UPX
+        run: |
+          # install upx
+          wget https://github.com/upx/upx/releases/download/v4.2.0/upx-4.2.0-amd64_linux.tar.xz 
+          tar -Jxf upx*.tar.xz
+          sudo cp upx*/upx /usr/bin
+          
+          # download cloudflared and unzip
+          mkdir -p musldist/linux-amd64
+          cd musldist/linux-amd64
+          wget -qO cloudflared https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64
+
+          # do upx Compress
+          upx --best cloudflared
+
+      - name: Upload dist
+        uses: actions/upload-artifact@main
+        with:
+          name: cloudflared
+          path: |
+              musldist/linux-amd64
+
+      - name: Generate release tag
+        id: tag
+        run: echo "::set-output name=release_tag::nezha-agent"
+
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.tag.outputs.release_tag }}
+          files: |
+              musldist/linux-amd64/*
+
+      - name: Remove old Releases
+        uses: dev-drprasad/delete-older-releases@v0.1.0
+        if: env.UPLOAD_RELEASE == 'true' && !cancelled()
+        with:
+          keep_latest: 1
+          delete_tags: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.ACCESS_KEY }}
