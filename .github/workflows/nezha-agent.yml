@@ -29,7 +29,7 @@ jobs:
           wget -O nezha-agent_linux_amd64.zip https://github.com/nezhahq/agent/releases/latest/download/nezha-agent_linux_amd64.zip
           unzip -qod ./ nezha-agent_linux_amd64.zip
           mv nezha-agent_linux_amd64.zip nezha-agent_linux_amd64-source.zip
-          upx --best nezha-agent
+          upx -1 nezha-agent
           zip nezha-agent_linux_amd64.zip nezha-agent
           rm nezha-agent
 
@@ -37,7 +37,7 @@ jobs:
           wget -O nezha-agent_linux_arm64.zip https://github.com/nezhahq/agent/releases/latest/download/nezha-agent_linux_arm64.zip
           unzip -qod ./ nezha-agent_linux_arm64.zip
           mv nezha-agent_linux_arm64.zip nezha-agent_linux_arm64-source.zip
-          upx --best nezha-agent
+          upx -1 nezha-agent
           zip nezha-agent_linux_arm64.zip nezha-agent
           rm nezha-agent
           
