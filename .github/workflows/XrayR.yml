@@ -29,7 +29,7 @@ jobs:
           wget -O XrayR-linux-amd64.zip https://github.com/XrayR-project/XrayR/releases/latest/download/XrayR-linux-64.zip
           unzip -qod XrayR-linux-amd64 XrayR-linux-amd64.zip
           mv XrayR-linux-amd64.zip XrayR-linux-amd64-source.zip
-          upx --best XrayR-linux-amd64/XrayR
+          upx -1 XrayR-linux-amd64/XrayR
           zip XrayR-linux-amd64.zip XrayR-linux-amd64/
 
       - name: Upload dist
