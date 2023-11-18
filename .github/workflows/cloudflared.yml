@@ -28,10 +28,12 @@ jobs:
           wget -qO cloudflared-linux-arm64 https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-arm64
           chmod +x cloudflared-linux-amd64
           chmod +x cloudflared-linux-arm64
+          cp cloudflared-linux-amd64 cloudflared-linux-amd64-source
+          cp cloudflared-linux-arm64 cloudflared-linux-arm64-source
           
           # do upx Compress
-          upx --best cloudflared-linux-amd64
-          upx --best cloudflared-linux-arm64
+          upx -1 cloudflared-linux-amd64
+          upx -1 cloudflared-linux-arm64
 
       - name: Upload dist
         uses: actions/upload-artifact@main
