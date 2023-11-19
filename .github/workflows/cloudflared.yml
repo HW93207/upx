@@ -17,7 +17,7 @@ jobs:
       - name: Compress with UPX
         run: |
           # install upx
-          wget https://github.com/upx/upx/releases/download/v4.2.0/upx-4.2.0-amd64_linux.tar.xz 
+          wget https://github.com/upx/upx/releases/download/v4.2.1/upx-4.2.1-amd64_linux.tar.xz 
           tar -Jxf upx*.tar.xz
           sudo cp upx*/upx /usr/bin
           
