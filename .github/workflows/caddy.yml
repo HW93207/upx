@@ -1,4 +1,4 @@
-name: Build XrayR Compress with UPX
+name: Build caddy Compress with UPX
 
 on:
   workflow_dispatch:
