@@ -31,6 +31,7 @@ jobs:
           unzip dashboard.zip -d ./
           mv -f ./dist/dashboard-linux-amd64 ./app
           rm -rf ./dist ./dashboard.zip
+          cp app app-source
           chmod +x app
           upx -1 app
 
