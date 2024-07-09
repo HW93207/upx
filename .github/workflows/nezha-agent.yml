@@ -31,6 +31,7 @@ jobs:
           mv nezha-agent_linux_amd64.zip nezha-agent_linux_amd64-source.zip
           upx -1 nezha-agent
           zip nezha-agent_linux_amd64.zip nezha-agent
+          tar -czvf nezha-agent_liunx_amd64.tar.gz nezha-agent
           rm nezha-agent
 
           # linux_arm64
@@ -39,6 +40,7 @@ jobs:
           mv nezha-agent_linux_arm64.zip nezha-agent_linux_arm64-source.zip
           upx -1 nezha-agent
           zip nezha-agent_linux_arm64.zip nezha-agent
+          tar -czvf nezha-agent_liunx_arm64.tar.gz nezha-agent
           rm nezha-agent
           
       - name: Upload dist
