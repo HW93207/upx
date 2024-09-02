@@ -29,8 +29,8 @@ jobs:
           DASHBOARD_LATEST=$(wget -qO- "https://api.github.com/repos/naiba/nezha/releases/latest" | awk -F '"' '/"tag_name"/{print $4}')
           wget -O dashboard.zip https://github.com/naiba/nezha/releases/download/$DASHBOARD_LATEST/dashboard-linux-amd64.zip
           unzip dashboard.zip -d ./
-          mv -f ./dist/dashboard-linux-amd64 ./app
-          rm -rf ./dist ./dashboard.zip
+          mv -f ./dashboard-linux-amd64 ./app
+          rm -rf ./dashboard.zip
           cp app app-source
           chmod +x app
           upx -1 app
